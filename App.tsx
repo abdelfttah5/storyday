@@ -151,7 +151,7 @@ const App: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [loginInput, setLoginInput] = useState('');
   const [loginError, setLoginError] = useState(false);
-  const [adminPassword, setAdminPassword] = useState(() => safeLocalStorage.get('admin_pwd') || '1234');
+  const [adminPassword, setAdminPassword] = useState(() => safeLocalStorage.get('admin_pwd') || 'Aa55');
 
   // Info/About Modal State
   const [showAboutModal, setShowAboutModal] = useState(false);
@@ -453,6 +453,7 @@ const App: React.FC = () => {
       let currentSession = chatSession;
       
       if (!currentSession) {
+        // @ts-ignore - Process is replaced by Vite at build time
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
         currentSession = ai.chats.create({
           model: 'gemini-2.5-flash',
@@ -967,8 +968,8 @@ const App: React.FC = () => {
             <BookOpen size={20} strokeWidth={2.5} />
           </div>
           <div className="flex flex-col">
-            <h1 className="font-bold text-lg leading-none text-slate-800 tracking-tight">قصتي اليوم</h1>
-            <span className="text-[10px] text-slate-500 font-medium">مدرسة يزيد بن الحارث</span>
+            <h1 className="font-bold text-lg leading-none text-slate-800 tracking-tight">storyday - قصتي اليوم</h1>
+            <span className="text-[10px] text-slate-500 font-medium">تعليم - متعة - ابتكار</span>
           </div>
         </div>
         
@@ -1023,6 +1024,10 @@ const App: React.FC = () => {
                     <span className="font-bold text-slate-700">تنمية مهارات التفكير</span>
                  </div>
                </div>
+
+               <p className="text-[10px] text-slate-400 font-medium pt-2">
+                 Dev: Ahmed Abdelfttah
+               </p>
 
                <div className="pt-2">
                  <button onClick={() => setShowAboutModal(false)} className="w-full bg-slate-900 text-white py-3.5 rounded-xl font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200">
